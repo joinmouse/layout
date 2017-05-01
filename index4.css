@@ -1,0 +1,21 @@
+ul,li{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ct{
+  border:1px orange dashed;
+  width: 640px;
+  margin: 0 auto;
+}
+.ct .item{
+  width: 200px;
+  height: 200px;
+  background: red;
+  margin-left: 20px;
+  margin-top: 16px;
+  float: left;
+}
+.ct>ul{
+  margin-left:-20px;
+}
