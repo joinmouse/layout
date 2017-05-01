@@ -1,0 +1,35 @@
+.layout{
+  margin:0 auto;
+  width:600px;
+}
+
+.btn{
+  display:inline-block;
+  border:1px solid #ccc;
+  border-right:0;
+  font-size:14px;
+  text-decoration:none;
+  padding:5px 8px;
+}
+.btn:first-child{
+  border-radius:5px 0 0 5px;
+}
+.btn:last-child{
+  border-right:1px solid #ccc;
+  border-radius:0px 5px 5px 0;
+}
+#header{
+  background:#eee;
+  font-size:0;
+  text-align:center;
+  padding:10px;
+}
+
+#content{
+  height:400px;
+  background: pink;
+}
+#footer{
+  height:50px;
+  background: yellow;
+}
