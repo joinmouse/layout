@@ -1,0 +1,19 @@
+.aside{
+  width: 200px;
+  height: 500px;
+  background: red;
+  float: left;
+}
+.main{
+  height: 400px;
+}
+/*清除浮动，使塌陷的父元素恢复原样*/
+#content:after{
+  content: "";
+  display: block;
+  clear: both;
+}
+
+#footer{
+  background: #ccc
+}
