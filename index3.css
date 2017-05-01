@@ -1,0 +1,26 @@
+.aside{
+  width: 200px;
+  height: 500px;
+  background: red;
+  float: left;
+}
+.menu{
+  width:100px;
+  height:500px;
+  background: pink;
+  float: right;
+}
+.main{
+  height: 400px;
+  background: yellow;
+  margin-left:210px;
+}
+
+#footer{
+  background: #ccc
+}
+#content:after{
+  content:"";
+  display: block;
+  clear: both;
+}
