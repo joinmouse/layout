@@ -6,6 +6,7 @@
 }
 .main{
   height: 400px;
+  background: yellow;
 }
 /*清除浮动，使塌陷的父元素恢复原样*/
 #content:after{
