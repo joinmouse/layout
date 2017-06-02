@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>瀑布流布局</title>
+  <style>
+    .ct {
+      position: relative;
+    }
+    .item {
+      position: absolute;
+      width:200px;
+      margin: 10px;
+      transform: all 1s;
+    }
+    .item.h1 {
+      height: 200px;
+      background: yellow;
+    }
+    .item.h2 {
+      height: 300px;
+      background: blue;
+    }
+    .item.h3 {
+      height: 400px;
+      background: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="ct">
+    <div class="item h1">
+      1
+    </div>
+    <div class="item h1">
+      2
+    </div>
+    <div class="item h2">
+      3
+    </div>
+    <div class="item h3">
+      4
+    </div>
+    <div class="item h1">
+      5
+    </div>
+    <div class="item h3">
+      6
+    </div>
+    <div class="item h2">
+      7
+    </div>
+    <div class="item h2">
+      8
+    </div>
+    <div class="item h3">
+      9
+    </div>
+    <div class="item h1">
+      10
+    </div>
+    <div class="item h1">
+      11
+    </div>
+    <div class="item h2">
+      12
+    </div>
+    <div class="item h3">
+      13
+    </div>
+    <div class="item h1">
+      14
+    </div>
+    <div class="item h1">
+      15
+    </div>
+  </div>
+
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+    $(window).resize(function(){
+      waterfull()
+    })
+
+    function waterfull(){
+      var nodeWidth = $('.item').width()
+      var ctWidth = $('.ct').width()
+      var colLen = parseInt(ctWidth/nodeWidth)
+
+      var itemArr = []
+      for(var i=0;i<colLen;i++){
+        itemArr[i]=0
+      }
+      $('.item').each(function(){
+        var minValue = Math.min.apply(null,itemArr)
+        var minIndex = itemArr.indexOf(minValue)
+        //将元素放置在合理的地方
+        $(this).css({
+          top: itemArr[minIndex],
+          left: $(this).outerWidth(true) * minIndex
+        })
+          itemArr[minIndex] += $(this).outerHeight(true)
+      })
+    }  
+  </script>
+</body>
+</html>
