@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>木桶布局</title>
+  <style type="text/css">
+    .img-ct {
+      width: 1200px;
+      margin: 0 auto;
+    }
+    .img-arr {
+      width: 1201px;
+    }
+    .img-arr:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+    .img-ct>.img-arr>img {
+      display: block;
+      float: left;
+
+      margin-top: 10px;
+      margin-right: 10px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="img-ct"></div>
+
+  
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    
+    function Barrels($ct,num){
+      this.$ct = $ct
+      this.num = num
+      this.rowList = []
+      
+      this.loadImg()
+    }
+    Barrels.prototype = {
+      loadImg: function(){
+        var num = this.num
+        var imgsUrl = this.getImgUrls(num)
+        var _this = this
+        for (var i = 0; i < imgsUrl.length; i++) {
+          !function(){
+            var img = new Image()
+            img.src = imgsUrl[i]
+            
+            img.onload = function(){
+              var imgInfo = {
+                target: this,
+                height: 200,
+                width: 200*(this.width/this.height)
+              }
+
+              _this.render(imgInfo)
+            }
+          }()
+        }
+      },
+      getImgUrls: function(num){
+        var urls = [];
+        for (var i = 0; i<num ;i++){
+          src ='https://unsplash.it/'+parseInt(Math.random()*100+400)+'/'
+                +parseInt(Math.random()*100+200)+'/?random'
+          urls.push(src)
+        }
+        return urls;
+      },
+      render: function(imgInfo){
+        var clientWidth = this.$ct.width()
+        console.log(clientWidth)
+        var rowWidth = 0
+        var rowHeight = 0
+        this.rowList.push(imgInfo)
+
+        for (var i = 0; i < this.rowList.length; i++) {
+          rowWidth = rowWidth+this.rowList[i].width
+          clientWidth -=10
+        }
+
+        if (rowWidth>clientWidth) {
+          clientWidth +=10
+          rowWidth -= imgInfo.width
+          this.rowList.pop()
+          var newRowHeight = 200*(clientWidth/rowWidth)
+          this.layOut(newRowHeight)
+          this.rowList = []
+          this.rowList.push(imgInfo)
+        }
+        
+      },
+      layOut: function(newRowHeight){
+        var $imgArr = $('<div class="img-arr"></div>')
+        $.each(this.rowList,function(idx,imgInfo){
+          
+          var $img = $(imgInfo.target)
+          $img.height(newRowHeight)
+          console.log(this)
+          $imgArr.append($img)
+        })
+        this.$ct.append($imgArr)
+        console.log(this.$ct)
+      }
+    }
+    var showImg = new Barrels($('.img-ct'),50)
+    showImg
+    
+  </script>
+
+</body>
+</html>
